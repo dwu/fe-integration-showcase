@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Scenario 1 - Product List</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h2>Product List</h2>
+        <ul v-for="(item, id) in products">
+            <li>{{ item.name }} ({{ item.price }}€) <button v-on:click="addToCart(id)">Add to cart</button></li>
+        </ul>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                products: {}
+            },
+            methods: {
+                updateProducts: function () {
+                    axios.get('/api/products').then((response) => {
+                        this.products = response.data.items;
+                    });
+                },
+                addToCart: function(id) {
+                    parent.postMessage({ operation: "addToCart", value: id }, "*");
+                }
+            },
+            mounted: function () {
+                this.$nextTick(function () {
+                    this.updateProducts();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
