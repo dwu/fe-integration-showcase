@@ -10,7 +10,9 @@
             this.log('connected');
             this.refresh();
 
-            window.addEventListener("ProductList-addToCart", (event) => this.addToCart(event.detail.productId));
+            handleEvent(this, 'addToCart', function (event) {
+                this.addToCart(event.productId);
+            }.bind(this));
         }
         refresh() {
             this.log('refresh');
@@ -52,7 +54,11 @@
             }, this);
 
             document.getElementById("buy").addEventListener('click', function () {
-                alert('Thanks for your ' + this.total + '€. :)')
+                if (this.total > 0) {
+                    alert('Thanks for your ' + this.total + '€. :)');
+                } else {
+                    alert('Thanks for nothing!');
+                }
             }.bind(this));
     }
         disconnectedCallback() {
