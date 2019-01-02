@@ -34,15 +34,11 @@
             this.innerHTML = `
                 <div id="shopping-cart">
                     <h2>Shopping Cart</h2>
-                    <ul>`;
-
-            this.cart.forEach(function(key, pos) {
-                this.innerHTML += `<li>${this.products[key].name} (${this.products[key].price}€) <button id="removeFromCart-${pos}">X</button></li>`;
-            }, this);
-
-            this.innerHTML += `
+                    <ul>
+                        ${this.cart.map(function(key, pos) {
+                            return `<li>${this.products[key].name} (${this.products[key].price}€) <button id="removeFromCart-${pos}">X</button></li>`;
+                        }, this).join('')}
                     </ul>
-                    <br>
                     Total: ${this.total} <button id="buy">Buy</button>
                 </div>`;
 
@@ -60,7 +56,7 @@
                     alert('Thanks for nothing!');
                 }
             }.bind(this));
-    }
+        }
         disconnectedCallback() {
             this.log('disconnected');
         }
