@@ -7,8 +7,6 @@
 
             this.log('connected');
             this.refresh();
-
-            window.addEventListener("ShoppingCart-addToCart", (event) => this.addToCart(event.detail.productId));
         }
         refresh() {
             this.log('refresh');
@@ -24,12 +22,17 @@
                 <div id="product-list">
                     <h2>Product List</h2>
                     <ul>
-                        ${Object.keys(this.products).map(function(key) {
-                            return `<li>${this.products[key].name} (${this.products[key].price}€) <button onClick="productList_addToCart(${key})">Add to cart</button></li>`
+                        ${Object.keys(this.products).map(function(key, pos) {
+                            return `<li>${this.products[key].name} (${this.products[key].price}€) <button id="addToCart-${pos}">Add to cart</button></li>`;
                         }, this).join('')}
                     </ul>
-
                 </div>`;
+
+            Object.keys(this.products).forEach(function(key, pos) {
+                document.getElementById(`addToCart-${pos}`).addEventListener("click", function() {
+                    fireEvent(this, 'addToCart', { 'productId' : key });
+                }.bind(this));
+            }, this);
         }
         disconnectedCallback() {
             this.log('disconnected');
@@ -42,8 +45,3 @@
     window.customElements.define('product-list', ProductList);
 
 }());
-
-function productList_addToCart(productId) {
-    const event = new CustomEvent('ProductList-addToCart', { 'detail': { 'productId' : productId } });
-    window.dispatchEvent(event);
-}
