@@ -14,6 +14,7 @@
         <ul v-for="(item, pos) in cart">
             <li>{{ products[item].name }} ({{ products[item].price }}€) <button v-on:click="removeItemFromCart(pos)">X</button></li>
         </ul>
+        <br>
         Total: {{ total }} <button v-on:click="checkout">Buy</button>
         <button v-on:click="clear">Clear cart</button>
     </div>
@@ -34,14 +35,14 @@
                     this.cart.splice(pos, 1);
                 },
                 checkout: function() {
-                    alert("Thanks for your " + this.total + "€. :)");
+                    alert('Thanks for your ' + this.total + '€. :)');
                 },
                 clear: function() {
                     this.cart = [];
                 },
                 registerPostMessageHandlers: function () {
-                    window.addEventListener("message", function(e) {
-                        if (e.data.operation == "addToCart") {
+                    window.addEventListener('message', function(e) {
+                        if (e.data.operation == 'addToCart') {
                             app.cart.push(e.data.value);
                         }
                     });
