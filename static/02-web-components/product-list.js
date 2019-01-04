@@ -25,7 +25,7 @@
                     <h2>Product List</h2>
                     <ul>
                         ${Object.keys(this.products).map(function(key) {
-                            return `<li>${this.products[key].name} (${this.products[key].price}€) <button onClick="productList_addToCart(${key})">Add to cart</button></li>`
+                            return `<li>${this.products[key].name} (${this.products[key].price}€) <button onClick="productList_addToCart(${key})">Add to cart</button></li>`;
                         }, this).join('')}
                     </ul>
 
