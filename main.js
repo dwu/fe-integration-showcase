@@ -11,7 +11,7 @@ app.use(express.static('static'));
 
 // Common APIs
 app.get('/api/products', (req, res) => {
-    res.send(200, {
+    res.status(200).send({
         items: {
             1: {
                 name: "Product 1",
