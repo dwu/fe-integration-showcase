@@ -10,7 +10,9 @@
             this.log('connected');
             this.refresh();
 
-            window.addEventListener("ProductList-addToCart", (event) => this.addToCart(event.detail.productId));
+            handleEvent(this, 'addToCart', function (event) {
+                this.addToCart(event.productId);
+            }.bind(this));
         }
         refresh() {
             this.log('refresh');
@@ -32,15 +34,11 @@
             this.innerHTML = `
                 <div id="shopping-cart">
                     <h2>Shopping Cart</h2>
-                    <ul>`;
-
-            this.cart.forEach(function(key, pos) {
-                this.innerHTML += `<li>${this.products[key].name} (${this.products[key].price}€) <button id="removeFromCart-${pos}">X</button></li>`;
-            }, this);
-
-            this.innerHTML += `
+                    <ul>
+                        ${this.cart.map(function(key, pos) {
+                            return `<li>${this.products[key].name} (${this.products[key].price}€) <button id="removeFromCart-${pos}">X</button></li>`;
+                        }, this).join('')}
                     </ul>
-                    <br>
                     Total: ${this.total} <button id="buy">Buy</button>
                 </div>`;
 
@@ -52,9 +50,13 @@
             }, this);
 
             document.getElementById("buy").addEventListener('click', function () {
-                alert('Thanks for your ' + this.total + '€. :)')
+                if (this.total > 0) {
+                    alert('Thanks for your ' + this.total + '€. :)');
+                } else {
+                    alert('Thanks for nothing!');
+                }
             }.bind(this));
-    }
+        }
         disconnectedCallback() {
             this.log('disconnected');
         }
