@@ -1,0 +1,22 @@
+{
+  "name": "fe-integration",
+  "version": "0.0.1",
+  "description": "Showcase for various frontend integration techniques",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dwu/fe-integration-showcase.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dwu/fe-integration-showcase/issues"
+  },
+  "homepage": "https://github.com/dwu/fe-integration-showcase#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
