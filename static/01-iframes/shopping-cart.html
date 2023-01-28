@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Scenario 1 - Shopping Cart</title>
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
@@ -19,11 +19,13 @@
         <button v-on:click="clear">Clear cart</button>
     </div>
     <script>
-        var app = new Vue({
-            el: '#app',
-            data: {
-                products: {},
-                cart: []
+        const { createApp } = Vue
+        const app = createApp({
+            data() {
+                return {
+                    products: {},
+                    cart: [],
+                }
             },
             methods: {
                 updateProducts: function () {
@@ -36,6 +38,7 @@
                 },
                 checkout: function() {
                     alert('Thanks for your ' + this.total + '€. :)');
+                    this.clear();
                 },
                 clear: function() {
                     this.cart = [];
@@ -52,7 +55,9 @@
                 total: function() {
                     var total = 0;
                     this.cart.forEach(function (item) {
-                        total += app.products[item].price;
+                        if (item in app.products) {
+                            total += app.products[item].price;
+                        }
                     });
                     return total;
                 }
@@ -63,7 +68,7 @@
                     this.registerPostMessageHandlers();
                 });
             }
-        });
+        }).mount('#app');
     </script>
 </body>
 </html>
