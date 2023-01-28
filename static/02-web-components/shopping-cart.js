@@ -40,6 +40,8 @@
             }, this).join('')}
                     </ul>
                     Total: ${this.total} <button id="buy">Buy</button>
+                    <button id="clear">Clear cart</button>
+
                 </div>`;
 
             // attach handlers
@@ -55,6 +57,11 @@
                 } else {
                     alert('Thanks for nothing!');
                 }
+            }.bind(this));
+
+            document.getElementById("clear").addEventListener('click', function () {
+                this.cart = [];
+                this.render();
             }.bind(this));
         }
         disconnectedCallback() {
