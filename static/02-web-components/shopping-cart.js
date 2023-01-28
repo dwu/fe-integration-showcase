@@ -35,15 +35,15 @@
                 <div id="shopping-cart">
                     <h2>Shopping Cart</h2>
                     <ul>
-                        ${this.cart.map(function(key, pos) {
-                            return `<li>${this.products[key].name} (${this.products[key].price}€) <button id="removeFromCart-${pos}">X</button></li>`;
-                        }, this).join('')}
+                        ${this.cart.map(function (key, pos) {
+                return `<li>${this.products[key].name} (${this.products[key].price}€) <button id="removeFromCart-${pos}">X</button></li>`;
+            }, this).join('')}
                     </ul>
                     Total: ${this.total} <button id="buy">Buy</button>
                 </div>`;
 
             // attach handlers
-            this.cart.forEach(function(key, pos) {
+            this.cart.forEach(function (key, pos) {
                 document.getElementById(`removeFromCart-${pos}`).addEventListener('click', function () {
                     this.removeFromCart(pos);
                 }.bind(this));

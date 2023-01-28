@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,7 @@
     <script>
         /* Common event handling code */
         function fireEvent(object, eventname, eventpayload) {
-            object.dispatchEvent(new CustomEvent(eventname, { 'detail' : eventpayload }));
+            object.dispatchEvent(new CustomEvent(eventname, { 'detail': eventpayload }));
         }
         function handleEvent(object, eventname, handler) {
             object.addEventListener(eventname, function (event) {
@@ -18,15 +19,20 @@
         }
     </script>
     <style>
-     #product-list {
-         float: left;
-     }
-     #shopping-cart {
-         margin-left: 50px;
-         float: left;
-     }
+        #product-list {
+            float: left;
+            width: 400px;
+            border: 1px solid red;
+        }
+
+        #shopping-cart {
+            float: left;
+            width: 400px;
+            border: 1px solid blue;
+        }
     </style>
 </head>
+
 <body>
     <div id="app">
         <product-list id="product-list"></product-list>
@@ -44,4 +50,5 @@
         });
     </script>
 </body>
+
 </html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,11 +9,13 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
+
 <body>
     <div id="app">
         <h2>Shopping Cart</h2>
         <ul v-for="(item, pos) in cart">
-            <li>{{ products[item].name }} ({{ products[item].price }}€) <button v-on:click="removeItemFromCart(pos)">X</button></li>
+            <li>{{ products[item].name }} ({{ products[item].price }}€) <button
+                    v-on:click="removeItemFromCart(pos)">X</button></li>
         </ul>
         <br>
         Total: {{ total }} <button v-on:click="checkout">Buy</button>
@@ -33,18 +36,18 @@
                         this.products = response.data.items;
                     });
                 },
-                removeItemFromCart: function(pos) {
+                removeItemFromCart: function (pos) {
                     this.cart.splice(pos, 1);
                 },
-                checkout: function() {
+                checkout: function () {
                     alert('Thanks for your ' + this.total + '€. :)');
                     this.clear();
                 },
-                clear: function() {
+                clear: function () {
                     this.cart = [];
                 },
                 registerPostMessageHandlers: function () {
-                    window.addEventListener('message', function(e) {
+                    window.addEventListener('message', function (e) {
                         if (e.data.operation == 'addToCart') {
                             app.cart.push(e.data.value);
                         }
@@ -52,7 +55,7 @@
                 }
             },
             computed: {
-                total: function() {
+                total: function () {
                     var total = 0;
                     this.cart.forEach(function (item) {
                         if (item in app.products) {
@@ -71,4 +74,5 @@
         }).mount('#app');
     </script>
 </body>
+
 </html>

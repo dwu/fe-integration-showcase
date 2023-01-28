@@ -28,9 +28,9 @@
                     </ul>
                 </div>`;
 
-            Object.keys(this.products).forEach(function(key, pos) {
-                document.getElementById(`addToCart-${pos}`).addEventListener("click", function() {
-                    fireEvent(this, 'addToCart', { 'productId' : key });
+            Object.keys(this.products).forEach(function (key, pos) {
+                document.getElementById(`addToCart-${pos}`).addEventListener("click", function () {
+                    fireEvent(this, 'addToCart', { 'productId': key });
                 }.bind(this));
             }, this);
         }
