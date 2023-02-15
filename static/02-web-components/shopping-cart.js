@@ -10,7 +10,7 @@
             this.log('connected');
             this.refresh();
 
-            handleEvent(this, 'addToCart', function (event) {
+            handleEvent(window, 'ProductList-addToCart', function (event) {
                 this.addToCart(event.productId);
             }.bind(this));
         }
