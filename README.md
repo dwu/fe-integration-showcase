@@ -13,3 +13,4 @@ $ npm start
 |:---------------|:-----------------------------------------|
 | IFrames        | http://localhost:3000/01-iframes/        |
 | Web Components | http://localhost:3000/02-web-components/ |
+| AJAX           | http://localhost:3000/03-ajax/           |
