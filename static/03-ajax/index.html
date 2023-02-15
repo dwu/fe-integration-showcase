@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Scenario 3 - AJAX</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        /* Common event handling code */
+        function fireEvent(object, eventname, eventpayload) {
+            object.dispatchEvent(new CustomEvent(eventname, { 'detail': eventpayload }));
+        }
+        function handleEvent(object, eventname, handler) {
+            object.addEventListener(eventname, function (event) {
+                handler(event.detail);
+            });
+        }
+    </script>
+    <style>
+        #product-list {
+            float: left;
+            width: 400px;
+            border: 1px solid red;
+        }
+
+        #product-info {
+            float: left;
+            width: 400px;
+            border: 1px solid green;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <product-list id="product-list"></product-list>
+        <div id="product-info"></div>
+        <div class="clear"></div>
+    </div>
+    <script src="product-list.js"></script>
+    <script>
+        var productList = document.getElementById('product-list');
+        var productInfo = document.getElementById("product-info");
+
+        handleEvent(productList, 'hoverProduct', function (e) {
+            fireEvent(productInfo, 'hoverProduct', e)
+        });
+
+        handleEvent(productInfo, 'hoverProduct', function(e) {
+            axios.get("/api/product-info/" + e.productId).then((response) => {
+                productInfo.innerHTML = response.data;
+            });
+        });
+    </script>
+</body>
+
+</html>
