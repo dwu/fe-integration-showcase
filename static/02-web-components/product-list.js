@@ -3,18 +3,18 @@ class ProductList extends HTMLElement {
         this.refresh = this.refresh.bind(this);
         this.products = {};
 
-        this.log('connected');
+        this.log("connected");
         this.refresh();
     }
     refresh() {
-        this.log('refresh');
-        axios.get('/api/products').then((response) => {
+        this.log("refresh");
+        axios.get("/api/products").then((response) => {
             this.products = response.data.items;
             this.render();
         });
     }
     render() {
-        this.log('render');
+        this.log("render");
 
         this.innerHTML = `
             <div id="product-list">
@@ -22,27 +22,27 @@ class ProductList extends HTMLElement {
                 <ul>
                     ${Object.keys(this.products).map(function(key) {
                         return `<li>${this.products[key].name} (${this.products[key].price}€) <button id="addToCart-${key}">Add to cart</button></li>`;
-                    }, this).join('')}
+                    }, this).join("")}
                 </ul>
             </div>`;
 
         // Attach handlers
         Object.keys(this.products).map(function(key) {
-            document.getElementById(`addToCart-${key}`).addEventListener('click', function () {
+            document.getElementById(`addToCart-${key}`).addEventListener("click", function () {
                 this.addToCart(key);
             }.bind(this));
         }, this);
     }
     addToCart(productId) {
-        const event = new CustomEvent('addToCart', { 'detail': { 'productId' : productId } });
+        const event = new CustomEvent("addToCart", { "detail": { "productId" : productId } });
         this.dispatchEvent(event);
     }
     disconnectedCallback() {
-        this.log('disconnected');
+        this.log("disconnected");
     }
     log(...args) {
-        console.log('product-list', ...args);
+        console.log("product-list", ...args);
     }
 }
 
-window.customElements.define('product-list', ProductList);
+window.customElements.define("product-list", ProductList);

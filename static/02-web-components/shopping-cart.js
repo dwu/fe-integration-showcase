@@ -5,22 +5,22 @@ class ShoppingCart extends HTMLElement {
         this.cart = [];
         this.total = 0;
 
-        this.log('connected');
+        this.log("connected");
         this.refresh();
 
-        handleEvent(this, 'addToCart', function (event) {
+        handleEvent(this, "addToCart", function (event) {
             this.addToCart(event.productId);
         }.bind(this));
     }
     refresh() {
-        this.log('refresh');
-        axios.get('/api/products').then((response) => {
+        this.log("refresh");
+        axios.get("/api/products").then((response) => {
             this.products = response.data.items;
             this.render();
         });
     }
     render() {
-        this.log('render');
+        this.log("render");
 
         // calculate total
         this.total = 0;
@@ -35,7 +35,7 @@ class ShoppingCart extends HTMLElement {
                 <ul>
                     ${this.cart.map(function (key, pos) {
             return `<li>${this.products[key].name} (${this.products[key].price}€) <button id="removeFromCart-${pos}">X</button></li>`;
-        }, this).join('')}
+        }, this).join("")}
                 </ul>
                 Total: ${this.total} <button id="buy">Buy</button>
                 <button id="clear">Clear cart</button>
@@ -44,29 +44,29 @@ class ShoppingCart extends HTMLElement {
 
         // attach handlers
         this.cart.forEach(function (key, pos) {
-            document.getElementById(`removeFromCart-${pos}`).addEventListener('click', function () {
+            document.getElementById(`removeFromCart-${pos}`).addEventListener("click", function () {
                 this.removeFromCart(pos);
             }.bind(this));
         }, this);
 
-        document.getElementById("buy").addEventListener('click', function () {
+        document.getElementById("buy").addEventListener("click", function () {
             if (this.total > 0) {
-                alert('Thanks for your ' + this.total + '€. :)');
+                alert("Thanks for your " + this.total + "€. :)");
             } else {
-                alert('Thanks for nothing!');
+                alert("Thanks for nothing!");
             }
             this.clearCart();
         }.bind(this));
 
-        document.getElementById("clear").addEventListener('click', function () {
+        document.getElementById("clear").addEventListener("click", function () {
             this.clearCart();
         }.bind(this));
     }
     disconnectedCallback() {
-        this.log('disconnected');
+        this.log("disconnected");
     }
     log(...args) {
-        console.log('shopping-cart', ...args);
+        console.log("shopping-cart", ...args);
     }
     addToCart(productId) {
         this.cart.push(productId);
@@ -82,4 +82,4 @@ class ShoppingCart extends HTMLElement {
     }
 }
 
-window.customElements.define('shopping-cart', ShoppingCart);
+window.customElements.define("shopping-cart", ShoppingCart);

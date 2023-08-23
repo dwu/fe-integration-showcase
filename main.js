@@ -2,10 +2,10 @@
 const port = 3000;
 /* Configuration End */
 
-const express = require('express');
+const express = require("express");
 
 const app = express();
-app.use(express.static('static'));
+app.use(express.static("static"));
 
 /* Main */
 var data = {
@@ -27,14 +27,12 @@ var data = {
 };
 
 // Common APIs
-app.get('/api/products', (req, res) => {
+app.get("/api/products", (req, res) => {
     res.status(200).send({ items: data });
 });
 
-app.get('/api/product-info/:id', (req, res) => {
+app.get("/api/product-info/:id", (req, res) => {
     res.status(200).send(`<h2>Product info for product ${req.params.id}</h2>${data[req.params.id].description}`);
 });
 
-// Scenario 1 - IFrames
-
-app.listen(port, () => console.log(`Listening on port ${port}!`))
+app.listen(port, "0.0.0.0", () => console.log(`Listening on port ${port}!`))

@@ -10,7 +10,7 @@
     <script>
         /* Common event handling code */
         function fireEvent(object, eventname, eventpayload) {
-            object.dispatchEvent(new CustomEvent(eventname, { 'detail': eventpayload }));
+            object.dispatchEvent(new CustomEvent(eventname, { "detail": eventpayload }));
         }
         function handleEvent(object, eventname, handler) {
             object.addEventListener(eventname, function (event) {
@@ -42,11 +42,11 @@
     <script src="product-list.js"></script>
     <script src="shopping-cart.js"></script>
     <script>
-        var productList = document.getElementById('product-list');
-        var shoppingCart = document.getElementById('shopping-cart');
+        var productList = document.getElementById("product-list");
+        var shoppingCart = document.getElementById("shopping-cart");
 
-        handleEvent(productList, 'addToCart', function (e) {
-            fireEvent(shoppingCart, 'addToCart', e)
+        handleEvent(productList, "addToCart", function (e) {
+            fireEvent(shoppingCart, "addToCart", e)
         });
     </script>
 </body>

@@ -27,12 +27,12 @@
             },
             methods: {
                 updateProducts: function () {
-                    axios.get('/api/products').then((response) => {
+                    axios.get("/api/products").then((response) => {
                         this.products = response.data.items;
                     });
                 },
                 addToCart: function (id) {
-                    parent.postMessage({ operation: 'addToCart', value: id }, '*');
+                    parent.postMessage({ operation: "addToCart", value: id }, "*");
                 }
             },
             mounted: function () {
@@ -40,7 +40,7 @@
                     this.updateProducts();
                 });
             }
-        }).mount('#app')
+        }).mount("#app")
     </script>
 </body>
 

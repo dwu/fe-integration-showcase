@@ -32,7 +32,7 @@
             },
             methods: {
                 updateProducts: function () {
-                    axios.get('/api/products').then((response) => {
+                    axios.get("/api/products").then((response) => {
                         this.products = response.data.items;
                     });
                 },
@@ -40,15 +40,15 @@
                     this.cart.splice(pos, 1);
                 },
                 checkout: function () {
-                    alert('Thanks for your ' + this.total + '€. :)');
+                    alert("Thanks for your " + this.total + "€. :)");
                     this.clear();
                 },
                 clear: function () {
                     this.cart = [];
                 },
                 registerPostMessageHandlers: function () {
-                    window.addEventListener('message', function (e) {
-                        if (e.data.operation == 'addToCart') {
+                    window.addEventListener("message", function (e) {
+                        if (e.data.operation == "addToCart") {
                             app.cart.push(e.data.value);
                         }
                     });
@@ -71,7 +71,7 @@
                     this.registerPostMessageHandlers();
                 });
             }
-        }).mount('#app');
+        }).mount("#app");
     </script>
 </body>
 

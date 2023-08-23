@@ -10,7 +10,7 @@
     <script>
         /* Common event handling code */
         function fireEvent(object, eventname, eventpayload) {
-            object.dispatchEvent(new CustomEvent(eventname, { 'detail': eventpayload }));
+            object.dispatchEvent(new CustomEvent(eventname, { "detail": eventpayload }));
         }
         function handleEvent(object, eventname, handler) {
             object.addEventListener(eventname, function (event) {
@@ -41,14 +41,14 @@
     </div>
     <script src="product-list.js"></script>
     <script>
-        var productList = document.getElementById('product-list');
+        var productList = document.getElementById("product-list");
         var productInfo = document.getElementById("product-info");
 
-        handleEvent(productList, 'hoverProduct', function (e) {
-            fireEvent(productInfo, 'hoverProduct', e)
+        handleEvent(productList, "hoverProduct", function (e) {
+            fireEvent(productInfo, "hoverProduct", e)
         });
 
-        handleEvent(productInfo, 'hoverProduct', function(e) {
+        handleEvent(productInfo, "hoverProduct", function(e) {
             axios.get("/api/product-info/" + e.productId).then((response) => {
                 productInfo.innerHTML = response.data;
             });
