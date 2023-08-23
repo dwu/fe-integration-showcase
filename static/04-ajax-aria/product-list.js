@@ -21,7 +21,7 @@ class ProductList extends HTMLElement {
                 <h2>Product List</h2>
                 <ul>
                     ${Object.keys(this.products).map(function(key) {
-                        return `<li><span id="product-${key}">${this.products[key].name} (${this.products[key].price}€)</span> <button id="addToCart-${key}" aria-label="Add ${this.products[key].name} to cart">Add to cart</button></li>`;
+                        return `<li><span id="product-${key}">${this.products[key].name} (${this.products[key].price}€)</span> <button id="addToCart-${key}" aria-label="Add ${this.products[key].name} to cart, costs ${this.products[key].price}€">Add to cart</button></li>`;
                     }, this).join("")}
                 </ul>
             </div>`;
@@ -31,7 +31,9 @@ class ProductList extends HTMLElement {
             document.getElementById(`product-${key}`).addEventListener("mouseenter", function () {
                 this.mouseEnter(key);
             }.bind(this));
-            // no handler for button click in this example
+            document.getElementById(`addToCart-${key}`).addEventListener("click", function () {
+                alert("Added to cart");
+            }.bind(this));
         }, this);
     }
     mouseEnter(productId) {
